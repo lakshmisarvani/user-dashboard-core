@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import LoginForm from "@/components/auth/LoginForm";
+import Navbar from "@/components/layout/Navbar";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 const Index = () => {
+  const [user, setUser] = useState<{ type: 'user' | 'admin' } | null>(null);
+
+  const handleLogin = (userType: 'user' | 'admin') => {
+    setUser({ type: userType });
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  if (!user) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navbar userType={user.type} onLogout={handleLogout} />
+      <Dashboard userType={user.type} />
     </div>
   );
 };

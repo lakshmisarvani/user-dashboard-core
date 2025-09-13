@@ -5,16 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        // Primary: Deep Blue with White text, hover: Soft Cyan
+        default: "bg-deep-blue text-white hover:bg-soft-cyan hover:text-deep-blue transform hover:scale-105",
+        // Secondary: Light Gray with Dark Gray text, hover: Deep Blue
+        secondary: "bg-light-gray text-dark-gray hover:bg-deep-blue hover:text-white",
+        // Destructive/Cancel actions
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+        // Outline variant for secondary actions
+        outline: "border border-border bg-background hover:bg-light-gray hover:text-dark-gray",
+        // Ghost for minimal actions
+        ghost: "hover:bg-light-gray hover:text-dark-gray",
+        // Link style
+        link: "text-deep-blue underline-offset-4 hover:underline hover:text-soft-cyan",
+        // Success variant for confirmations
+        success: "bg-success text-success-foreground hover:bg-success/90 transform hover:scale-105",
+        // Warning variant for alerts
+        warning: "bg-warning text-warning-foreground hover:bg-warning/90",
       },
       size: {
         default: "h-10 px-4 py-2",
